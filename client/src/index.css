@@ -42,6 +42,9 @@
 }
 
 :root {
+  --priColor: #f9cdcd;
+  --secColor: #252422;
+  --tetColor: #f4f4f4;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
