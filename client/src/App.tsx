@@ -9,11 +9,14 @@ import News from "./pages/News";
 import Work from "./pages/Work";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
+import ScrollToTop from "./components/common/Scrolltotop";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
@@ -25,7 +28,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+
+      <Footer />
+    </div>
   );
 }
 

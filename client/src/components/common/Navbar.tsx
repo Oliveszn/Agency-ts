@@ -43,38 +43,38 @@ const Navbar = ({ theme = "white", className = "" }: NavbarProps) => {
   };
   const currentScheme = colorSchemes[theme];
 
-  // useEffect(() => {
-  //   const navbar = navbarRef.current;
-  //   if (!navbar) return;
+  useEffect(() => {
+    const navbar = navbarRef.current;
+    if (!navbar) return;
 
-  //   ScrollTrigger.create({
-  //     start: "top -80",
-  //     end: 99999,
-  //     onUpdate: (self) => {
-  //       ///so we use self-direction to detect scroll, -1 for up 1 for down
-  //       if (self.direction === -1) {
-  //         // while up show navbar
-  //         gsap.to(navbar, {
-  //           yPercent: 0,
-  //           duration: 0.5,
-  //           ease: "power2.out",
-  //         });
-  //       } else {
-  //         // while down hide navbar
-  //         gsap.to(navbar, {
-  //           yPercent: -100,
-  //           duration: 0.5,
-  //           ease: "power2.out",
-  //         });
-  //       }
-  //     },
-  //   });
+    ScrollTrigger.create({
+      start: "top -80",
+      end: 99999,
+      onUpdate: (self) => {
+        ///so we use self-direction to detect scroll, -1 for up 1 for down
+        if (self.direction === -1) {
+          // while up show navbar
+          gsap.to(navbar, {
+            yPercent: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        } else {
+          // while down hide navbar
+          gsap.to(navbar, {
+            yPercent: -100,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+      },
+    });
 
-  //   // Cleanup
-  //   return () => {
-  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  //   };
-  // }, []);
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   //to prevent scrolling when menu is openNaved
   useEffect(() => {
