@@ -90,10 +90,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`w-full z-50 shadow-sm  ${currentScheme.background} sticky top-0`}
+      className={`w-full z-50 shadow-sm px-6 sm:px-8 lg:px-10  ${currentScheme.background} sticky top-0`}
       ref={navbarRef}
     >
-      <div className="grid grid-cols-2 xl:grid-cols-[25%_75%] px-10 py-6 mx-auto items-center">
+      <div className="grid grid-cols-2 xl:grid-cols-[25%_75%] py-6 mx-auto max-w-6xl items-center">
         <div className="cursor-pointer">
           <Link to="/">
             <figure>

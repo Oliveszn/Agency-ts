@@ -96,7 +96,7 @@ const Contact = ({ navTheme = "white" }: PageProps) => {
       <Helmet>
         <title>Contact Us</title>
       </Helmet>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-0 lg:mb-40 ">
           <div className="image-section">
             <picture className="image-reveal block overflow-hidden">
