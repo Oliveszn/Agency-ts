@@ -13,6 +13,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ theme = "white", className = "" }: NavbarProps) => {
+  ///nav menu links
   let links = [
     { name: "WORK", link: "/work" },
     { name: "ABOUT", link: "/about" },
@@ -24,6 +25,7 @@ const Navbar = ({ theme = "white", className = "" }: NavbarProps) => {
   let [openNav, setOpenNav] = useState(false);
   const navbarRef = useRef<HTMLDivElement>(null);
 
+  ////color schemes to alternate nav colors on diff pages
   const colorSchemes = {
     transparent: {
       background: "bg-transparent",
@@ -43,6 +45,7 @@ const Navbar = ({ theme = "white", className = "" }: NavbarProps) => {
   };
   const currentScheme = colorSchemes[theme];
 
+  ///gsap animation to reveal and hide navbar
   useEffect(() => {
     const navbar = navbarRef.current;
     if (!navbar) return;

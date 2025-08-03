@@ -33,3 +33,17 @@ export const getPostBySlugQuery = `
    
   }
 `;
+
+export const getAllOffices = `
+*[_type == "offices"]{
+  city,
+    mainImage {
+      asset -> {
+        _id,
+        url
+      },
+      alt
+    },
+  address,
+}
+`;
