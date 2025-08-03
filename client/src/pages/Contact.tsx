@@ -4,6 +4,9 @@ import { getAllOffices } from "@/lib/sanityqueries";
 import { useEffect, useState, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
+import type { PageProps } from "@/utils/types";
+import { useAppDispatch } from "@/store/hooks";
+import { setNavTheme } from "@/store/navbar-slice";
 
 export interface OfficeLocation {
   city: string;
@@ -14,9 +17,14 @@ export interface OfficeLocation {
   address: string;
 }
 
-const Contact = () => {
+const Contact = ({ navTheme = "white" }: PageProps) => {
   const [locations, setLocations] = useState<OfficeLocation[]>([]);
   const overlayRef = useRef<HTMLSpanElement | null>(null);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setNavTheme(navTheme));
+  }, [navTheme, dispatch]);
 
   useEffect(() => {
     client

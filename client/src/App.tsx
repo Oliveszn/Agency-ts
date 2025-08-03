@@ -24,8 +24,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/news" element={<News />} />
         <Route path="/work" element={<Work />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/careers" element={<Careers navTheme="black" />} />
+        <Route path="/contact" element={<Contact navTheme="white" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

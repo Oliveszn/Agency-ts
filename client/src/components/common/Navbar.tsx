@@ -2,17 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useAppSelector } from "@/store/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type ColorTheme = "transparent" | "white" | "black";
-
-interface NavbarProps {
-  theme?: ColorTheme;
-  className?: string;
-}
-
-const Navbar = ({ theme = "white", className = "" }: NavbarProps) => {
+const Navbar = () => {
+  const navTheme = useAppSelector((state) => state.theme.navTheme);
   ///nav menu links
   let links = [
     { name: "WORK", link: "/work" },
@@ -43,7 +38,7 @@ const Navbar = ({ theme = "white", className = "" }: NavbarProps) => {
       logoFill: "fill-[var(--priColor)]",
     },
   };
-  const currentScheme = colorSchemes[theme];
+  const currentScheme = colorSchemes[navTheme];
 
   ///gsap animation to reveal and hide navbar
   useEffect(() => {
@@ -95,7 +90,7 @@ const Navbar = ({ theme = "white", className = "" }: NavbarProps) => {
 
   return (
     <nav
-      className={`w-full z-50 shadow-sm  ${currentScheme.background} ${className} sticky top-0`}
+      className={`w-full z-50 shadow-sm  ${currentScheme.background} sticky top-0`}
       ref={navbarRef}
     >
       <div className="grid grid-cols-2 xl:grid-cols-[25%_75%] px-10 py-6 mx-auto items-center">
