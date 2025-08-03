@@ -35,6 +35,7 @@ const ContactsTile = ({ product }: ContactTileProp) => {
           src={product.mainImage?.asset.url}
           className="w-full h-auto object-contain max-w-sm lg:max-w-none"
           alt="locations"
+          loading="lazy"
         />
       </picture>
       <div className="grid grid-cols-2 ">

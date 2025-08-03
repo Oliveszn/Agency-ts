@@ -1,12 +1,13 @@
 import ContactsTile from "@/components/Main-view/Contacts-tile";
 import client from "@/lib/sanityclient";
 import { getAllOffices } from "@/lib/sanityqueries";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
 import type { PageProps } from "@/utils/types";
 import { useAppDispatch } from "@/store/hooks";
 import { setNavTheme } from "@/store/navbar-slice";
+import { useQuery } from "@tanstack/react-query";
 
 export interface OfficeLocation {
   city: string;
@@ -18,22 +19,30 @@ export interface OfficeLocation {
 }
 
 const Contact = ({ navTheme = "white" }: PageProps) => {
-  const [locations, setLocations] = useState<OfficeLocation[]>([]);
   const overlayRef = useRef<HTMLSpanElement | null>(null);
   const dispatch = useAppDispatch();
 
+  //to dispatch our set color for the nav
   useEffect(() => {
     dispatch(setNavTheme(navTheme));
   }, [navTheme, dispatch]);
 
-  useEffect(() => {
-    client
-      .fetch(getAllOffices)
-      .then((data) => {
-        setLocations(data);
-      })
-      .catch(console.error);
-  }, []);
+  ////using reactt query to fetch officcess from sanity
+  const fetchOffices = async () => {
+    const data = await client.fetch(getAllOffices);
+    return data;
+  };
+
+  // Use React Query
+  const {
+    data: locations,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<OfficeLocation[]>({
+    queryKey: ["offices"],
+    queryFn: fetchOffices,
+  });
 
   //for handling image and text reveal
   useEffect(() => {
@@ -224,12 +233,26 @@ const Contact = ({ navTheme = "white" }: PageProps) => {
             {/* Vertical Line */}
             <div className="absolute inset-0 w-[2px] bg-black mx-aut0 left-1/2 hidden lg:block"></div>
 
-            {locations.length > 0 ? (
+            {isLoading ? (
+              [...Array(2)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-full h-60 bg-gray-200 rounded-lg animate-pulse"
+                />
+              ))
+            ) : isError ? (
+              <p>
+                Error:
+                {error instanceof Error
+                  ? error.message
+                  : "Unknown error occurred"}
+              </p>
+            ) : locations && locations.length > 0 ? (
               locations.map((productItem) => (
                 <ContactsTile product={productItem} key={productItem.city} />
               ))
             ) : (
-              <p className="text-red-500">No office locations available.</p>
+              <p>No office locations available.</p>
             )}
           </div>
         </div>

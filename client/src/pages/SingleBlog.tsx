@@ -1,8 +1,8 @@
 import client from "@/lib/sanityclient";
 import { getPostBySlugQuery } from "@/lib/sanityqueries";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PortableText } from "@portabletext/react";
+import { useQuery } from "@tanstack/react-query";
 
 interface Category {
   _id: string;
@@ -20,40 +20,58 @@ interface SinglePost {
 }
 
 const SingleBlog = () => {
-  const [singlePosts, setSinglePosts] = useState<SinglePost | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const { slug } = useParams();
 
-  useEffect(() => {
-    if (!slug) return;
-    client
-      .fetch(getPostBySlugQuery, { slug })
-      .then((data) => {
-        setSinglePosts(data);
-      })
-      .catch(console.error);
-    setIsLoading(false);
-  }, [slug]);
+  ////using reactt query to fetch officcess from sanity
+  const fetchSingleBlogs = async () => {
+    if (!slug) throw new Error("No slug provided");
+    const data = await client.fetch(getPostBySlugQuery, { slug });
+    return data;
+  };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!singlePosts) return <p>No post found</p>;
+  // Use React Query
+  const {
+    data: singlePosts,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<SinglePost>({
+    queryKey: ["singleblogs", slug],
+    queryFn: fetchSingleBlogs,
+    enabled: !!slug, // makes sure the query doesn't run if slug is undefined
+  });
 
   return (
     <div>
-      <h1>{singlePosts.title}</h1>
-      {singlePosts.categories?.map((cat) => (
-        <p key={cat._id}>Category: {cat.title}</p>
-      ))}
-      {singlePosts.mainImage && (
-        <img
-          src={singlePosts.mainImage.asset.url}
-          alt={singlePosts.mainImage.alt || "Image"}
-        />
-      )}
+      {isLoading ? (
+        <p>Loading post...</p>
+      ) : isError ? (
+        <p>
+          Error:{" "}
+          {error instanceof Error ? error.message : "Something went wrong."}
+        </p>
+      ) : singlePosts ? (
+        <>
+          <h1>{singlePosts.title}</h1>
 
-      <div>
-        <PortableText value={singlePosts.body} />
-      </div>
+          {singlePosts.categories?.map((cat) => (
+            <p key={cat._id}>Category: {cat.title}</p>
+          ))}
+
+          {singlePosts.mainImage && (
+            <img
+              src={singlePosts.mainImage.asset.url}
+              alt={singlePosts.mainImage.alt || "Image"}
+            />
+          )}
+
+          <div>
+            <PortableText value={singlePosts.body} />
+          </div>
+        </>
+      ) : (
+        <p>Post not found.</p>
+      )}
     </div>
   );
 };
