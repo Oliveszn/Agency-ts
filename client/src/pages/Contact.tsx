@@ -93,7 +93,7 @@ const Contact = ({ navTheme = "white" }: PageProps) => {
   };
   return (
     <div className="bg-[var(--tetColor)] px-6 sm:px-8 lg:px-10 py-10">
-      <Helmet>
+      <Helmet key={window.location.pathname}>
         <title>Contact Us</title>
       </Helmet>
       <div className="mx-auto max-w-6xl">

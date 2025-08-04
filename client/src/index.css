@@ -121,3 +121,62 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*/////// about///////// */
+.navigation-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation-link {
+  position: relative;
+  flex: 1;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.navigation-item span:before {
+  content: attr(data-text);
+  width: 0;
+  color: #f9cdcd;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  transition: all 1s cubic-bezier(0.84, 0, 0.08, 0.99);
+}
+
+.navigation-item span:hover:before {
+  width: 100%;
+}
+
+.hover-reveal {
+  position: fixed;
+  width: 400px;
+  height: 500px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease-out;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.hover-reveal-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  will-change: transform;
+  overflow: hidden;
+}
+
+.hover-reveal-image {
+  background-size: cover;
+  background-position: 50% 50%;
+  transform-origin: 50% 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  will-change: transform;
+  transform: scale(0.8, 0.8);
+  transition: 1.5s transform;
+}
