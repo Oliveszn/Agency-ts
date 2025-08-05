@@ -1,9 +1,24 @@
-import { useAppDispatch } from "@/store/hooks";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 import AboutAwards from "@/components/Main-view/About/AboutAwards";
-// import AboutAdmin from "@/components/Main-view/About/AboutAdmin";
+import { getAdminBySlug, getAllAdmins } from "@/lib/sanityqueries";
+import client from "@/lib/sanityclient";
+import { useQuery } from "@tanstack/react-query";
+import AboutTile from "@/components/Main-view/About/Abouttile";
+import AboutAdmin from "@/components/Main-view/About/AboutAdmin";
+import type { TypedObject } from "@portabletext/types";
+
+export interface Admins {
+  name: string;
+  slug: { current: string };
+  role: string;
+  images?: {
+    asset: { _id: string; url: string };
+    alt?: string;
+  }[];
+  bio: TypedObject[];
+}
 
 const About = () => {
   const organization = [
@@ -50,35 +65,37 @@ const About = () => {
         "https://cdn.sanity.io/images/8nn8fua5/production/b2bfc8aeb62ee863c983db40cae6c6ed78dfbc64-720x961.jpg?w=720&fm=webp&q=65",
     },
   ];
-  // const { productList, productDetails } = useSelector((state) => state.about);
-  const dispatch = useAppDispatch();
   const [openAbout, setOpenAbout] = useState(false);
   const [openAwards, setOpenAwards] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [curAdmin, setCurAdmin] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
+  ///images on second section
+  const [hovered, setHovered] = useState(null);
 
-  // const handleGetAdminDetails = (getCurrentProductId) => {
-  //   dispatch(getAdminDetails(getCurrentProductId));
+  ////using reactt query to fetch officcess from sanity
+  const fetchAdmins = async () => {
+    const data = await client.fetch(getAllAdmins);
+    return data;
+  };
 
-  //   const index = productList.findIndex(
-  //     (item) => item._id === getCurrentProductId
-  //   );
-  //   setCurAdmin(index);
-  //   setOpenAbout(true);
-  // };
+  // Use React Query
+  const {
+    data: admins,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<Admins[]>({
+    queryKey: ["admins"],
+    queryFn: fetchAdmins,
+  });
 
-  // const goToPreviousAdmin = () => {
-  //   const newIndex = curAdmin === 0 ? productList.length - 1 : curAdmin - 1;
-  //   setCurAdmin(newIndex);
-  //   dispatch(getAdminDetails(productList[newIndex]._id));
-  // };
-
-  // const goToNextAdmin = () => {
-  //   const newIndex = curAdmin === productList.length - 1 ? 0 : curAdmin + 1;
-  //   setCurAdmin(newIndex);
-  //   dispatch(getAdminDetails(productList[newIndex]._id));
-  // };
+  const handleGetAdminDetails = (index: number) => {
+    setOpenAbout(true);
+    setCurrentIndex(index);
+    console.log("Clicked", index);
+  };
 
   ///this is the function to open the awards table on click
   const handleOpenAwards = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -86,6 +103,7 @@ const About = () => {
     setOpenAwards(true);
   };
 
+  ///the 3 funcs below display the images when the texts are hovered on
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index); // Set the hovered link index
   };
@@ -103,9 +121,6 @@ const About = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     }
   };
-
-  ///images on second section
-  const [hovered, setHovered] = useState(null);
 
   const images = [
     {
@@ -127,14 +142,6 @@ const About = () => {
   ];
 
   const BASE_Z_INDEX = 10;
-
-  // Style generator function
-  // const getImageStyle = (index) => ({
-  //   opacity: hovered === index ? 1 : 0.7,
-  //   transform: hovered === index ? "scale(1.1)" : "scale(1)",
-  //   zIndex: hovered === index ? 50 : 10,
-  //   transition: "all 0.3s ease",
-  // });
 
   return (
     <div className="bg-[var(--secColor)] px-6 sm:px-8 lg:px-10 py-10">
@@ -494,28 +501,30 @@ const About = () => {
             </div>
           </div>
 
-          {/* <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {productList && productList.length > 0
-              ? productList.map((productItem) => (
+          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {admins && admins.length > 0
+              ? admins.map((admin, index) => (
                   <AboutTile
-                    product={productItem}
-                    key={productItem._id}
-                    handleGetAdminDetails={handleGetAdminDetails}
+                    admin={admin}
+                    key={admin.name}
+                    handleGetAdminDetails={() => handleGetAdminDetails(index)}
                   />
                 ))
               : null}
-          </ul> */}
+          </ul>
         </section>
 
-        {/* {productDetails && (
+        {admins && admins.length > 0 && (
           <AboutAdmin
+            admin={admins[currentIndex]}
             open={openAbout}
             setOpen={setOpenAbout}
-            productDetails={productDetails}
-            goToPreviousAdmin={goToPreviousAdmin}
-            goToNextAdmin={goToNextAdmin}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            admins={admins}
+            setSelectedSlug={setSelectedSlug}
           />
-        )} */}
+        )}
 
         <AboutAwards open={openAwards} setOpen={setOpenAwards} />
       </div>

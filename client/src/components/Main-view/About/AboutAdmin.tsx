@@ -1,56 +1,79 @@
-// import React, { useState } from "react";
-// import {
-//   Sheet,
-//   SheetContent,
-//   SheetDescription,
-//   SheetHeader,
-//   SheetTitle,
-// } from "@/components/ui/sheet";
-// import { ArrowRight, ArrowLeft } from "lucide-react";
+import React, { useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+import type { Admins } from "@/pages/About";
+import { PortableText } from "@portabletext/react";
 
-// const AboutAdmin = ({
-//   open,
-//   setOpen,
-//   productDetails,
-//   goToPreviousAdmin,
-//   goToNextAdmin,
-// }) => {
-//   return (
-//     <Sheet open={open} onOpenChange={setOpen}>
-//       <SheetContent className="w-full md:max-w-3xl overflow-auto flex flex-col">
-//         <SheetHeader>
-//           <SheetDescription className="">
-//             <div className="flex flex-col md:flex-row gap-8">
-//               <img
-//                 src={productDetails.image.replace(/&amp;/g, "&")}
-//                 alt={productDetails.name || "Product image"}
-//                 className="mt-4 max-w-sm"
-//               />
+interface AboutAdminProps {
+  admin: Admins;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+  admins: Admins[];
+}
 
-//               <div className="mt-6 text-secColor sm:font-medium md:font-semibold text-xl md:text-3xl lg:text-4xl uppercase">
-//                 <span>{productDetails?.name}</span> <br />/
-//                 <span>{productDetails?.role}</span>
-//               </div>
-//             </div>
-//           </SheetDescription>
-//         </SheetHeader>
-//         <SheetDescription className="text-secColor text-3xl font-semibold mt-8">
-//           {productDetails.description}
-//         </SheetDescription>
+const AboutAdmin = ({
+  admin,
+  open,
+  setOpen,
+  currentIndex,
+  setCurrentIndex,
+  admins,
+  setSelectedSlug,
+}: AboutAdminProps & { setSelectedSlug: (slug: string) => void }) => {
+  const goToNextAdmin = () => {
+    setCurrentIndex((prev) => (prev + 1) % admins.length);
+  };
 
-//         <div className="pointer-events-auto sticky left-0 right-0 bottom-0 bg-white shadow-lg mt-auto">
-//           <div className="flex justify-between items-center h-12">
-//             <button onClick={goToPreviousAdmin}>
-//               <ArrowLeft />
-//             </button>
-//             <button onClick={goToNextAdmin}>
-//               <ArrowRight />
-//             </button>
-//           </div>
-//         </div>
-//       </SheetContent>
-//     </Sheet>
-//   );
-// };
+  const goToPreviousAdmin = () => {
+    setCurrentIndex((prev) => (prev - 1 + admins.length) % admins.length);
+  };
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetContent className="w-full md:max-w-3xl overflow-auto flex flex-col p-6">
+        <SheetHeader>
+          <SheetTitle></SheetTitle>
+        </SheetHeader>
+        <div className="">
+          <div className="flex flex-col md:flex-row gap-8">
+            {admin.images?.[0] && (
+              <img
+                src={admin.images[0].asset.url.replace(/&amp;/g, "&")}
+                alt={admin.name || "Admin image"}
+                className="mt-4 max-w-sm"
+              />
+            )}
 
-// export default AboutAdmin;
+            <div className="mt-6 text-secColor sm:font-medium md:font-semibold text-xl md:text-3xl lg:text-4xl uppercase">
+              <span>{admin?.name}</span> <br />/<span>{admin?.role}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-secColor text-3xl font-semibold mt-8">
+          <PortableText value={admin.bio} />
+        </div>
+
+        <div className="pointer-events-auto sticky left-0 right-0 bottom-0 bg-white shadow-lg mt-auto">
+          <div className="flex justify-between items-center h-12">
+            <button onClick={goToPreviousAdmin}>
+              <ArrowLeft />
+            </button>
+            <button onClick={goToNextAdmin}>
+              <ArrowRight />
+            </button>
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+};
+
+export default AboutAdmin;

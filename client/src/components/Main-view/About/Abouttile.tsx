@@ -1,40 +1,34 @@
-// const AboutTile = ({ product, handleGetAdminDetails }) => {
-//   return (
-//     <li
-//       className="flex cursor-pointer"
-//       onClick={() => handleGetAdminDetails(product._id)}
-//     >
-//       <a>
-//         <div className="flex flex-row gap-6">
-//           <div>
-//             <picture>
-//               <img
-//                 src={product?.image}
-//                 alt={product?.name}
-//                 className="w-full h-auto max-w-sm object-contain mx-auto"
-//               />
-//             </picture>
-//           </div>
+import type { Admins } from "@/pages/About";
 
-//           <div>
-//             <picture>
-//               <img
-//                 src={product?.imageTwo}
-//                 alt={product?.name}
-//                 className="w-full h-auto max-w-sm object-contain mx-auto"
-//               />
-//             </picture>
-//           </div>
-//         </div>
+//  handleGetAdminDetails
+interface AboutTileProps {
+  admin: Admins;
+  handleGetAdminDetails: () => void;
+}
+const AboutTile = ({ admin, handleGetAdminDetails }: AboutTileProps) => {
+  return (
+    <li className="flex cursor-pointer" onClick={handleGetAdminDetails}>
+      <a>
+        <div className="flex flex-row gap-6">
+          {admin.images?.map((img, idx) => (
+            <picture key={idx}>
+              <img
+                src={img.asset.url}
+                alt={img.alt || admin.name}
+                className="w-full h-auto max-w-sm object-contain mx-auto"
+              />
+            </picture>
+          ))}
+        </div>
 
-//         <div className="uppercase">
-//           {product.name}
-//           <br />
-//           <strong>{product.role}</strong>
-//         </div>
-//       </a>
-//     </li>
-//   );
-// };
+        <div className="uppercase">
+          {admin.name}
+          <br />
+          <strong>{admin.role}</strong>
+        </div>
+      </a>
+    </li>
+  );
+};
 
-// export default AboutTile;
+export default AboutTile;

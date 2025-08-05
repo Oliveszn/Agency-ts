@@ -47,3 +47,35 @@ export const getAllOffices = `
   address,
 }
 `;
+
+export const getAllAdmins = `
+*[_type == "admins"]{
+name,
+slug,
+role,
+ images[] {
+      asset -> {
+        _id,
+        url
+      },
+      alt
+    },
+  bio
+}
+`;
+
+export const getAdminBySlug = `
+*[_type == "admins" && slug.current == $slug][0]{
+  name,
+  slug,
+  role,
+  images[] {
+    asset -> {
+      _id,
+      url
+    },
+    alt
+  },
+  bio
+}
+`;
