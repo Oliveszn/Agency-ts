@@ -18,10 +18,10 @@ function App() {
       <Navbar />
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home navTheme="white" />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<SingleBlog />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About navTheme="black" />} />
         <Route path="/news" element={<News />} />
         <Route path="/work" element={<Work />} />
         <Route path="/careers" element={<Careers navTheme="black" />} />

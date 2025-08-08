@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AboutAwards from "@/components/Main-view/About/AboutAwards";
 import AboutAdmin from "@/components/Main-view/About/AboutAdmin";
@@ -9,11 +9,20 @@ import CapabilitiesSection from "@/components/Main-view/About/CapabilitiesSectio
 import AdminSection from "@/components/Main-view/About/AdminSection";
 import { useAdmins } from "@/hooks/useAdmin";
 import AwardsSection from "@/components/Main-view/About/AwardsSection";
+import type { PageProps } from "@/utils/types";
+import { useAppDispatch } from "@/store/hooks";
+import { setNavTheme } from "@/store/navbar-slice";
 
-const About = () => {
+const About = ({ navTheme = "white" }: PageProps) => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openAwards, setOpenAwards] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const dispatch = useAppDispatch();
+
+  //to dispatch our set color for the nav
+  useEffect(() => {
+    dispatch(setNavTheme(navTheme));
+  }, [navTheme, dispatch]);
 
   const { data: admins, isLoading, isError } = useAdmins();
   const handleGetAdminDetails = (index: number) => {

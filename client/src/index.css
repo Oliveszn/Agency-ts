@@ -180,3 +180,137 @@
   transform: scale(0.8, 0.8);
   transition: 1.5s transform;
 }
+
+/********* HOME CAROUSEL */
+
+.event-scroller {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 2rem;
+  grid-auto-columns: 29%;
+  /* grid-auto-columns: 80vw; */
+  overflow-x: auto;
+  overscroll-behavior-inline: contain; /*this stops the user from dragging the page while scrolling*/
+
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.event-scroller::-webkit-scrollbar {
+  height: 0.3rem;
+  background: #ecefeb;
+  border-radius: 9.99rem;
+}
+
+.event-scroller::-webkit-scrollbar-thumb {
+  background: #c6cdc1;
+  border-radius: 9.99rem;
+}
+
+.event-element {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-rows: min-content;
+  padding: 2rem;
+}
+
+.event-element > img {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* HOME PAGE [WORK] */
+.image-scroller {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  grid-auto-columns: 32%;
+}
+
+.image-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.image-element {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-rows: min-content;
+  padding: 1rem;
+}
+
+.image-element img,
+.image-element video {
+  inline-size: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .image-scroller {
+    grid-auto-columns: 80%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .image-scroller {
+    grid-auto-columns: 55%;
+  }
+}
+
+.cursor-custom {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  z-index: 9999;
+  transition: 0.5s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
+    0.2s cubic-bezier(0.75, -1.27, 0.3, 2.33) opacity;
+  user-select: none;
+  pointer-events: none;
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+.cursor-custom.active {
+  opacity: 1;
+  transform: scale(12);
+}
+
+.cursor-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.cursor-text {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 600;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  white-space: normal;
+  transition: opacity 0.3s ease;
+}
+
+.cursor-none {
+  cursor: none !important;
+}
+
+.cursor-none * {
+  cursor: none !important;
+}
