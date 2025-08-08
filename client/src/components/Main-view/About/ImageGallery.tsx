@@ -40,7 +40,8 @@ const ImageGallery = () => {
     });
   };
 
-  const handleMouseLeave = (leftIndex: number) => {
+  ///the _ here is to tell ts that we know its not being used and its fines, so it doesnt guive the the yellow line
+  const handleMouseLeave = (_index: number) => {
     imageRefs.current.forEach((ref, i) => {
       if (ref) {
         gsap.to(ref, {

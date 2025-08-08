@@ -1,4 +1,4 @@
-import type { Admins } from "@/pages/About";
+import type { Admins } from "@/utils/types";
 
 interface AboutTileProps {
   admin: Admins;
