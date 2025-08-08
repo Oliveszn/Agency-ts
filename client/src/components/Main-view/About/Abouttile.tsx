@@ -1,6 +1,5 @@
 import type { Admins } from "@/pages/About";
 
-//  handleGetAdminDetails
 interface AboutTileProps {
   admin: Admins;
   handleGetAdminDetails: () => void;

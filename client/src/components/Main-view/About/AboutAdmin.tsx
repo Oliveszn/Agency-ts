@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
@@ -23,11 +22,9 @@ const AboutAdmin = ({
   admin,
   open,
   setOpen,
-  currentIndex,
   setCurrentIndex,
   admins,
-  setSelectedSlug,
-}: AboutAdminProps & { setSelectedSlug: (slug: string) => void }) => {
+}: AboutAdminProps) => {
   const goToNextAdmin = () => {
     setCurrentIndex((prev) => (prev + 1) % admins.length);
   };
@@ -63,10 +60,10 @@ const AboutAdmin = ({
 
         <div className="pointer-events-auto sticky left-0 right-0 bottom-0 bg-white shadow-lg mt-auto">
           <div className="flex justify-between items-center h-12">
-            <button onClick={goToPreviousAdmin}>
+            <button onClick={goToPreviousAdmin} className="cursor-pointer">
               <ArrowLeft />
             </button>
-            <button onClick={goToNextAdmin}>
+            <button onClick={goToNextAdmin} className="cursor-pointer">
               <ArrowRight />
             </button>
           </div>
