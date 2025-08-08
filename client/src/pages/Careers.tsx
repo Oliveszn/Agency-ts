@@ -66,7 +66,7 @@ const Careers = ({ navTheme = "black" }: PageProps) => {
       <Helmet key={window.location.pathname}>
         <title>Design & Branding Jobs</title>
       </Helmet>
-      <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2">
+      <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2">
         <div className="lg:mt-24 text-[var(--priColor)] uppercase flex flex-col items-start">
           <h1 className="mb-20 lg:mb-40">
             <div className="text-5xl lg:text-7xl font-semibold lg:font-bold">

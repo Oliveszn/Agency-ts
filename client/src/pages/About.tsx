@@ -41,7 +41,7 @@ const About = ({ navTheme = "white" }: PageProps) => {
       <Helmet>
         <title>About Us</title>
       </Helmet>
-      <div className="mx-auto max-w-6xl text-[var(--priColor)]">
+      <div className="mx-auto max-w-7xl text-[var(--priColor)]">
         <HeroSection />
         <ImageGallery />
         <AgencyStatsSection />

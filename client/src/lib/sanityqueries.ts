@@ -1,7 +1,6 @@
 export const getAllPostsQuery = `
   *[_type == "post"]{
     title,
-    category,
     slug,
     body,
     mainImage {
@@ -10,6 +9,10 @@ export const getAllPostsQuery = `
         url
       },
       alt
+    },
+    "categories": categories[]->{
+     _id,
+       title
     }
   }
 `;

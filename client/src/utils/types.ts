@@ -5,6 +5,7 @@ export interface PageProps {
   navTheme?: "transparent" | "white" | "black";
 }
 
+///for about page
 export interface Admins {
   name: string;
   slug: { current: string };
@@ -14,4 +15,21 @@ export interface Admins {
     alt?: string;
   }[];
   bio: TypedObject[];
+}
+
+///for thinking page
+interface Category {
+  _id: string;
+  title: string;
+}
+
+export interface Post {
+  title: string;
+  slug: { current: string };
+  body: any;
+  mainImage?: {
+    asset: { _id: string; url: string };
+    alt?: string;
+  };
+  categories?: Category[];
 }

@@ -1,3 +1,4 @@
+////for fetching admins in about page
 import client from "@/lib/sanityclient";
 import { getAllAdmins } from "@/lib/sanityqueries";
 import type { Admins } from "@/utils/types";

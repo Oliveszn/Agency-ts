@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 import SingleBlog from "./pages/SingleBlog";
 import Navbar from "./components/common/Navbar";
@@ -11,6 +10,7 @@ import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/common/Scrolltotop";
 import Footer from "./components/common/Footer";
+import Thinking from "./pages/Thinking";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home navTheme="white" />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/thinking" element={<Thinking navTheme="black" />} />
         <Route path="/blog/:slug" element={<SingleBlog />} />
         <Route path="/about" element={<About navTheme="black" />} />
         <Route path="/news" element={<News />} />
