@@ -24,8 +24,8 @@ const Navbar = () => {
   const colorSchemes = {
     transparent: {
       background: "bg-transparent",
-      text: "text-[var(--tetColor)]",
-      logoFill: "fill-[var(--tetColor)]",
+      text: "text-[var(--secColor)]",
+      logoFill: "fill-[var(--secColor)]",
     },
     white: {
       background: "bg-[var(--tetColor)]",
