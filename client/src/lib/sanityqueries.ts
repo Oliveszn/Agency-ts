@@ -3,6 +3,7 @@ export const getAllPostsQuery = `
     title,
     slug,
     body,
+    publishedAt,
     mainImage {
       asset -> {
         _id,
@@ -22,6 +23,7 @@ export const getPostBySlugQuery = `
     title,
     slug,
     body,
+    publishedAt,
     mainImage {
       asset -> {
         _id,

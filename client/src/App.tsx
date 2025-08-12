@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home navTheme="white" />} />
         <Route path="/thinking" element={<Thinking navTheme="black" />} />
-        <Route path="/blog/:slug" element={<SingleBlog />} />
+        <Route path="/thinking/:slug" element={<SingleBlog />} />
         <Route path="/about" element={<About navTheme="black" />} />
         <Route path="/news" element={<News />} />
         <Route path="/work" element={<Work />} />

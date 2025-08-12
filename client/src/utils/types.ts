@@ -32,4 +32,16 @@ export interface Post {
     alt?: string;
   };
   categories?: Category[];
+  publishedAt: any;
+}
+
+export interface SinglePost {
+  title: string;
+  body: any;
+  mainImage?: {
+    asset: { _id: string; url: string };
+    alt?: string;
+  };
+  categories?: Category[];
+  publishedAt: any;
 }

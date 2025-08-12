@@ -11,7 +11,7 @@ const ThinkingTile = ({ posts }: ThinkingProps) => {
       {posts.map((post) => (
         <div className="group" key={post.slug.current}>
           <Link
-            to={`/blog/${post.slug.current}`}
+            to={`/thinking/${post.slug.current}`}
             className="group-hover:underline cursor-pointer"
             style={{ textDecorationColor: "#f9cdcd" }}
           >
