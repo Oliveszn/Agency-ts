@@ -18,7 +18,7 @@ export interface Admins {
 }
 
 ///for thinking page
-interface Category {
+export interface Category {
   _id: string;
   title: string;
 }
