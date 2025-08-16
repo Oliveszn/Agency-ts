@@ -10,29 +10,9 @@ const AboutUsSection = () => {
   const navRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: ".pinned-section",
-        start: "top 2%",
-        end: "bottom bottom",
-        pin: ".pinned-nav",
-        pinSpacing: false,
-      });
-    });
-    return () => ctx.revert();
-  }, []);
+    const mm = gsap.matchMedia();
 
-  useEffect(() => {
-    // Kill any existing ScrollTriggers on this element
-    ScrollTrigger.getAll().forEach((trigger) => {
-      if (trigger.trigger === pinnedRef.current) {
-        trigger.kill();
-      }
-    });
-
-    let mm = gsap.matchMedia();
-
-    // we only appply it on larger screens where the layout is side by side
+    ///// we only appply it on larger screens where the layout is side by side
     mm.add("(min-width: 640px)", () => {
       ScrollTrigger.create({
         trigger: pinnedRef.current,
@@ -41,21 +21,12 @@ const AboutUsSection = () => {
         pin: navRef.current,
         pinSpacing: false,
         invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          // Optional: Add any additional logic during scroll
-          console.log("Pinned nav progress:", self.progress);
-        },
       });
     });
 
-    // Cleanup (this also kills it on small screens)
+    // Cleanup
     return () => {
       mm.kill();
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === pinnedRef.current) {
-          trigger.kill();
-        }
-      });
     };
   }, []);
   return (

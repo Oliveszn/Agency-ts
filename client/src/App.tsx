@@ -26,7 +26,7 @@ function App() {
         />
         <Route path="/about" element={<About navTheme="black" />} />
         <Route path="/news" element={<News />} />
-        <Route path="/work" element={<Work />} />
+        <Route path="/work" element={<Work navTheme="white" />} />
         <Route path="/careers" element={<Careers navTheme="black" />} />
         <Route path="/contact" element={<Contact navTheme="white" />} />
         <Route path="*" element={<NotFound />} />

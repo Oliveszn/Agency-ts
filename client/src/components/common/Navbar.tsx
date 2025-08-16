@@ -12,7 +12,6 @@ const Navbar = () => {
   let links = [
     { name: "WORK", link: "/work" },
     { name: "ABOUT", link: "/about" },
-    { name: "NEWS", link: "/news" },
     { name: "THINKING", link: "/thinking" },
     { name: "CAREERS", link: "/careers" },
     { name: "CONTACT", link: "/contact" },

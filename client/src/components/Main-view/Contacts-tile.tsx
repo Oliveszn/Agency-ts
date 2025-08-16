@@ -1,32 +1,45 @@
 import type { OfficeLocation } from "@/pages/Contact";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ContactTileProp {
   product: OfficeLocation;
 }
 
 const ContactsTile = ({ product }: ContactTileProp) => {
-  const [currentTime, setCurrentTime] = useState();
+  const [currentTime, setCurrentTime] = useState<string>("");
+  const cityTimezones: Record<string, string> = {
+    "St. Louis": "America/Chicago",
+    Argentina: "America/Argentina/Buenos_Aires",
+    Amsterdam: "Europe/Amsterdam",
+    London: "Europe/London",
+    Berlin: "Europe/Berlin",
+    "Bay Area": "America/Los_Angeles",
+    "San Diego": "America/Los_Angeles",
+    "New York": "America/New_York",
+  };
 
-  //   useEffect(() => {
-  //     const updateCurrentTime = () => {
-  //       const formatter = new Intl.DateTimeFormat("en-US", {
-  //         timeZone: product.timeZone,
-  //         hour: "2-digit",
-  //         minute: "2-digit",
-  //         hour12: true,
-  //         timeZoneName: "short", // Get the timezone abbreviation (e.g., PST, CET)
-  //       });
+  useEffect(() => {
+    const updateCurrentTime = () => {
+      // Use city-based timezone mapping instead of product.timeZone
+      const timeZone = cityTimezones[product.city] || "UTC";
 
-  //       const formattedTime = formatter.format(new Date());
-  //       setCurrentTime(formattedTime); // Ensure it is a string
-  //     };
+      const formatter = new Intl.DateTimeFormat("en-US", {
+        timeZone: timeZone,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+        timeZoneName: "short",
+      });
 
-  //     updateCurrentTime();
-  //     const interval = setInterval(updateCurrentTime, 1000); // Update every second
+      const formattedTime = formatter.format(new Date());
+      setCurrentTime(formattedTime);
+    };
 
-  //     return () => clearInterval(interval); // Cleanup on unmount
-  //   }, [product.timeZone]);
+    updateCurrentTime();
+    const interval = setInterval(updateCurrentTime, 1000);
+
+    return () => clearInterval(interval);
+  }, [product.city]);
 
   return (
     <div className="uppercase lg:max-w-none max-w-sm">
@@ -43,9 +56,9 @@ const ContactsTile = ({ product }: ContactTileProp) => {
           {product.city}
         </h1>
 
-        {/* <span className="blinking text-[#848382] text-base font-normal lg:font-medium text-right">
+        <span className="blinking text-[var(--secColor)] text-base font-normal lg:font-medium text-right">
           {currentTime}
-        </span> */}
+        </span>
       </div>
 
       <p className="flex mt-6 text-[#252422] font-medium text-sm w-3/4">
