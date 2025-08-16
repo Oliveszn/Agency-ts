@@ -1,29 +1,19 @@
 import { useAppDispatch } from "@/store/hooks";
 import { setNavTheme } from "@/store/navbar-slice";
 import type { PageProps } from "@/utils/types";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
+import { useHoverButton } from "@/hooks/useHoverButton";
 
 const Careers = ({ navTheme = "black" }: PageProps) => {
-  const overlayRef = useRef<HTMLSpanElement | null>(null);
+  const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
 
   const dispatch = useAppDispatch();
   //to dispatch our set color for the nav
   useEffect(() => {
     dispatch(setNavTheme(navTheme));
   }, [navTheme, dispatch]);
-
-  //func for handling button hover
-  const handleButtonHover = (isHovering: boolean) => {
-    const overlay = overlayRef.current;
-    if (!overlay) return;
-    gsap.to(overlay, {
-      scaleY: isHovering ? 1 : 0,
-      duration: 0.4,
-      ease: isHovering ? "power2.out" : "power2.in",
-    });
-  };
 
   //for handling image and text reveal
   useEffect(() => {
@@ -123,8 +113,8 @@ const Careers = ({ navTheme = "black" }: PageProps) => {
             <br />
 
             <button
-              onMouseEnter={() => handleButtonHover(true)}
-              onMouseLeave={() => handleButtonHover(false)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               className="relative inline-block overflow-hidden py-1 px-8 border-[1.6px] border-[var(--priColor)] rounded-2xl uppercase text-[var(--priColor)] z-10 bg-[var(--secColor)] whitespace-nowrap group hover:text-black"
             >
               <span className="relative z-20">Apply Now</span>

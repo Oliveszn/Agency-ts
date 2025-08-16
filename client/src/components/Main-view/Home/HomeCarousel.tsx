@@ -29,12 +29,12 @@ const HomeCarousel = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="portfolio-item event-scroller ">
+        <div className="portfolio-item grid grid-flow-col gap-4 overflow-x-auto overscroll-x-contain px-6 grid auto-cols-[89%] sm:auto-cols-[69%] md:auto-cols-[49%] lg:auto-cols-[29%]">
           {carousel.map((item, index) => {
             const parts = item.subtitle.split("here");
             return (
               <li
-                className="relative list-none event-element portfolio-thumb"
+                className="relative list-none grid gap-2 p-6 min-w-0"
                 key={index}
               >
                 <div className="relative">
@@ -43,7 +43,7 @@ const HomeCarousel = () => {
                       <img
                         src={item.image}
                         alt=""
-                        className="w-full h-auto max-w-[8rem] object-contain "
+                        className="w-full h-auto max-w-[8rem] object-contain"
                       />
                     </picture>
                     <svg

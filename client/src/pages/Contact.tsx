@@ -1,13 +1,14 @@
 import ContactsTile from "@/components/Main-view/Contacts-tile";
 import client from "@/lib/sanityclient";
 import { getAllOffices } from "@/lib/sanityqueries";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
 import type { PageProps } from "@/utils/types";
 import { useAppDispatch } from "@/store/hooks";
 import { setNavTheme } from "@/store/navbar-slice";
 import { useQuery } from "@tanstack/react-query";
+import { useHoverButton } from "@/hooks/useHoverButton";
 
 export interface OfficeLocation {
   city: string;
@@ -19,8 +20,8 @@ export interface OfficeLocation {
 }
 
 const Contact = ({ navTheme = "white" }: PageProps) => {
-  const overlayRef = useRef<HTMLSpanElement | null>(null);
   const dispatch = useAppDispatch();
+  const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
 
   //to dispatch our set color for the nav
   useEffect(() => {
@@ -80,17 +81,6 @@ const Contact = ({ navTheme = "white" }: PageProps) => {
 
     return () => ctx.revert();
   }, []);
-
-  //func for handling button hover
-  const handleButtonHover = (isHovering: boolean) => {
-    const overlay = overlayRef.current;
-    if (!overlay) return;
-    gsap.to(overlay, {
-      scaleY: isHovering ? 1 : 0,
-      duration: 0.4,
-      ease: isHovering ? "power2.out" : "power2.in",
-    });
-  };
   return (
     <div className="bg-[var(--tetColor)] px-6 sm:px-8 lg:px-10 py-10">
       <Helmet key={window.location.pathname}>
@@ -207,8 +197,8 @@ const Contact = ({ navTheme = "white" }: PageProps) => {
               </li>
             </ul>
             <button
-              onMouseEnter={() => handleButtonHover(true)}
-              onMouseLeave={() => handleButtonHover(false)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               className="relative inline-block overflow-hidden py-1 px-8 border-[1.6px] border-[var(--secColor)] rounded-2xl uppercase text-black z-10 bg-[var(--tetColor)] whitespace-nowrap group hover:text-white"
             >
               <span className="relative z-20">Apply Now</span>

@@ -183,42 +183,15 @@
 }
 
 /********* HOME CAROUSEL */
-
-.event-scroller {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 2rem;
-  grid-auto-columns: 29%;
-  /* grid-auto-columns: 80vw; */
-  overflow-x: auto;
-  overscroll-behavior-inline: contain; /*this stops the user from dragging the page while scrolling*/
-
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-.event-scroller::-webkit-scrollbar {
+.portfolio-item::-webkit-scrollbar {
   height: 0.3rem;
   background: #ecefeb;
   border-radius: 9.99rem;
 }
 
-.event-scroller::-webkit-scrollbar-thumb {
+.portfolio-item::-webkit-scrollbar-thumb {
   background: #c6cdc1;
   border-radius: 9.99rem;
-}
-
-.event-element {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-rows: min-content;
-  padding: 2rem;
-}
-
-.event-element > img {
-  inline-size: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
 }
 
 /* HOME PAGE [WORK] */

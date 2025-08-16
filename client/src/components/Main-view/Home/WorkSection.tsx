@@ -1,6 +1,9 @@
+import { useHoverButton } from "@/hooks/useHoverButton";
 import { Link } from "react-router-dom";
 
 const WorkSection = () => {
+  const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
+
   return (
     <section className="">
       <div>
@@ -15,10 +18,16 @@ const WorkSection = () => {
           </h3>
           <p className="mt-10">
             <Link
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               to="/work"
-              className="text-sm font-normal md:font-medium lg:font-semibold border-[1.6px] border-black rounded-full px-6 py-2 whitespace-nowrap uppercase"
+              className="relative inline-block overflow-hidden text-sm font-normal md:font-medium lg:font-semibold border-[1.6px] border-[var(--secColor)] text-black z-10 bg-[var(--tetColor)] rounded-full px-6 py-2 whitespace-nowrap uppercase hover:text-white"
             >
-              See The Work
+              <span className="relative z-20"> See The Work</span>
+              <span
+                ref={overlayRef}
+                className="absolute left-0 top-0 h-full w-full bg-[var(--secColor)] scale-y-0 origin-bottom z-10"
+              />
             </Link>
           </p>
         </div>
@@ -35,7 +44,7 @@ const WorkSection = () => {
       </div>
 
       <ul className="image-scroller list-none">
-        <li className="image-element">
+        <li className="image-element group">
           <a href="google.com">
             <div className="">
               <div className=" ">
@@ -47,13 +56,13 @@ const WorkSection = () => {
                   <img
                     src="https://cdn.sanity.io/images/8nn8fua5/production/931c4de4f3cbbeb30a5b65677a174f2980e44805-720x900.jpg?w=720&amp;fm=webp&amp;q=65"
                     alt=""
-                    className="w-full h-auto object-contain"
+                    className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-95 group-hover:translate-y-2"
                   />
                 </picture>
               </div>
             </div>
             <div className="pt-6 uppercase w-full ">
-              <h5 className="text-xl lg:text-2xl font-semibold lg:font-bold">
+              <h5 className="text-xl lg:text-2xl font-semibold lg:font-bold group-hover:underline">
                 Patagonia
               </h5>
               <p className="text-xs lg:text-sm w-1/2">
@@ -63,7 +72,7 @@ const WorkSection = () => {
           </a>
         </li>
 
-        <li className="image-element">
+        <li className="image-element group">
           <a href="">
             <div className="">
               <div className="">
@@ -75,13 +84,13 @@ const WorkSection = () => {
                   <img
                     src="https://cdn.sanity.io/images/8nn8fua5/production/f1931ee572cd014ca5c3b5fe7e6054cfc0583624-720x900.jpg?w=720&amp;fm=webp&amp;q=65"
                     alt=""
-                    className="w-full h-auto object-contain"
+                    className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-95 group-hover:translate-y-2"
                   />
                 </picture>
               </div>
             </div>
             <div className="pt-6 uppercase w-full ">
-              <h5 className="text-xl lg:text-2xl font-semibold lg:font-bold">
+              <h5 className="text-xl lg:text-2xl font-semibold lg:font-bold group-hover:underline">
                 Wilson
               </h5>
               <p className="text-xs lg:text-sm w-1/2">
@@ -91,7 +100,7 @@ const WorkSection = () => {
           </a>
         </li>
 
-        <li className="image-element">
+        <li className="image-element group">
           <a href="">
             <div className="">
               <div className="">
@@ -103,12 +112,12 @@ const WorkSection = () => {
                   autoPlay
                   src="https://cdn.sanity.io/files/8nn8fua5/production/9dc5a490bd877e8685f2089209db192188dd21e7.mp4"
                   data-can-play="true"
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-95 group-hover:translate-y-2"
                 ></video>
               </div>
             </div>
             <div className="pt-6 uppercase w-full ">
-              <h5 className="text-xl lg:text-2xl font-semibold lg:font-bold">
+              <h5 className="text-xl lg:text-2xl font-semibold lg:font-bold group-hover:underline">
                 Google Store
               </h5>
               <p className="text-xs lg:text-sm w-1/2">

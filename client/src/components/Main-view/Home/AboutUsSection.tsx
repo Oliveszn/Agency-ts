@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { useHoverButton } from "@/hooks/useHoverButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutUsSection = () => {
+  const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
   const pinnedRef = useRef(null);
   const navRef = useRef(null);
 
@@ -45,10 +47,17 @@ const AboutUsSection = () => {
               </strong>
               <p className="mt-10 lg:mt-20">
                 <Link
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
                   to="/about"
-                  className="text-sm font-normal md:font-medium lg:font-semibold border-[1.6px] border-priColor rounded-full px-6 py-2 whitespace-nowrap"
+                  className="relative inline-block overflow-hidden text-sm font-normal md:font-medium lg:font-semibold border-[1.6px] border-[var(--priColor)] rounded-full px-6 py-2 text-[var(--priColor)] z-10 bg-[var(--secColor)] whitespace-nowrap hover:text-black"
                 >
-                  About Us
+                  <span className="relative z-20"> About Us</span>
+
+                  <span
+                    ref={overlayRef}
+                    className="absolute left-0 top-0 h-full w-full bg-[var(--priColor)] scale-y-0 origin-bottom z-10"
+                  />
                 </Link>
               </p>
             </span>

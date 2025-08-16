@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 interface UseCursorProps {
   containerRef: React.RefObject<HTMLElement | null>;
-  smoothness?: number; // How smooth the cursor follows (default: 9)
+  smoothness?: number; // How smooth the cursor follows
 }
 
 export const useCursor = ({ containerRef, smoothness = 9 }: UseCursorProps) => {
