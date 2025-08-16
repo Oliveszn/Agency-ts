@@ -5,12 +5,15 @@ import { useEffect } from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { setNavTheme } from "@/store/navbar-slice";
 
-const SingleBlog = ({ navTheme = "black" }: PageProps) => {
+const SingleBlog = ({
+  navTheme = "black",
+  footerTheme = "white",
+}: PageProps) => {
   const dispatch = useAppDispatch();
   const { data: singlePosts, isLoading, isError, error } = useSingleBlog();
   useEffect(() => {
-    dispatch(setNavTheme(navTheme));
-  }, [navTheme, dispatch]);
+    dispatch(setNavTheme({ navTheme, footerTheme }));
+  }, [navTheme, footerTheme, dispatch]);
 
   return (
     <div className="bg-[var(--secColor)] px-6 sm:px-8 lg:px-10 py-10">

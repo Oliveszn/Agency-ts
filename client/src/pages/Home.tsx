@@ -13,15 +13,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Home = ({ navTheme = "white" }: PageProps) => {
+const Home = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
   const dispatch = useAppDispatch();
   const aboutRef = useRef(null);
   const containerRef = useRef(null);
 
   //to dispatch our set color for the nav
   useEffect(() => {
-    dispatch(setNavTheme(navTheme));
-  }, [navTheme, dispatch]);
+    dispatch(setNavTheme({ navTheme, footerTheme }));
+  }, [navTheme, footerTheme, dispatch]);
 
   useEffect(() => {
     const scrollTrigger = ScrollTrigger.create({
@@ -35,7 +35,7 @@ const Home = ({ navTheme = "white" }: PageProps) => {
           duration: 0.5,
           ease: "power2.out",
         });
-        dispatch(setNavTheme("black"));
+        dispatch(setNavTheme({ navTheme: "black", footerTheme: "white" }));
       },
       onEnterBack: () => {
         gsap.to(containerRef.current, {
@@ -44,7 +44,7 @@ const Home = ({ navTheme = "white" }: PageProps) => {
           duration: 0.5,
           ease: "power2.out",
         });
-        dispatch(setNavTheme("black"));
+        dispatch(setNavTheme({ navTheme: "black", footerTheme: "white" }));
       },
       onLeave: () => {
         gsap.to(containerRef.current, {
@@ -53,7 +53,7 @@ const Home = ({ navTheme = "white" }: PageProps) => {
           duration: 0.5,
           ease: "power2.out",
         });
-        dispatch(setNavTheme(navTheme));
+        dispatch(setNavTheme({ navTheme, footerTheme }));
       },
       onLeaveBack: () => {
         gsap.to(containerRef.current, {
@@ -62,7 +62,7 @@ const Home = ({ navTheme = "white" }: PageProps) => {
           duration: 0.5,
           ease: "power2.out",
         });
-        dispatch(setNavTheme(navTheme));
+        dispatch(setNavTheme({ navTheme, footerTheme }));
       },
     });
 

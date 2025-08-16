@@ -19,14 +19,14 @@ export interface OfficeLocation {
   address: string;
 }
 
-const Contact = ({ navTheme = "white" }: PageProps) => {
+const Contact = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
   const dispatch = useAppDispatch();
   const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
 
   //to dispatch our set color for the nav
   useEffect(() => {
-    dispatch(setNavTheme(navTheme));
-  }, [navTheme, dispatch]);
+    dispatch(setNavTheme({ navTheme, footerTheme }));
+  }, [navTheme, footerTheme, dispatch]);
 
   ////using reactt query to fetch officcess from sanity
   const fetchOffices = async () => {

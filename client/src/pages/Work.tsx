@@ -5,14 +5,14 @@ import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
 
-const Work = ({ navTheme = "white" }: PageProps) => {
+const Work = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
   const dispatch = useAppDispatch();
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const dotsRef = useRef<HTMLSpanElement>(null);
   useEffect(() => {
-    dispatch(setNavTheme(navTheme));
-  }, [navTheme, dispatch]);
+    dispatch(setNavTheme({ navTheme, footerTheme }));
+  }, [navTheme, footerTheme, dispatch]);
 
   useEffect(() => {
     const tl = gsap.timeline();

@@ -6,14 +6,14 @@ import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
 import { useHoverButton } from "@/hooks/useHoverButton";
 
-const Careers = ({ navTheme = "black" }: PageProps) => {
+const Careers = ({ navTheme = "black", footerTheme = "white" }: PageProps) => {
   const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
 
   const dispatch = useAppDispatch();
   //to dispatch our set color for the nav
   useEffect(() => {
-    dispatch(setNavTheme(navTheme));
-  }, [navTheme, dispatch]);
+    dispatch(setNavTheme({ navTheme, footerTheme }));
+  }, [navTheme, footerTheme, dispatch]);
 
   //for handling image and text reveal
   useEffect(() => {

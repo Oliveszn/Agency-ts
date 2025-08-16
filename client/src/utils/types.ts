@@ -3,6 +3,7 @@ import type { TypedObject } from "@portabletext/types";
 ////used for navbar
 export interface PageProps {
   navTheme?: "transparent" | "white" | "black";
+  footerTheme?: "transparent" | "white" | "black";
 }
 
 ///for about page

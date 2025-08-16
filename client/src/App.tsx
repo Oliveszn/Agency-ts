@@ -18,17 +18,35 @@ function App() {
       <Navbar />
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home navTheme="white" />} />
-        <Route path="/thinking" element={<Thinking navTheme="black" />} />
+        <Route
+          path="/"
+          element={<Home navTheme="white" footerTheme="black" />}
+        />
+        <Route
+          path="/thinking"
+          element={<Thinking navTheme="black" footerTheme="white" />}
+        />
         <Route
           path="/thinking/:slug"
-          element={<SingleBlog navTheme="black" />}
+          element={<SingleBlog navTheme="black" footerTheme="white" />}
         />
-        <Route path="/about" element={<About navTheme="black" />} />
+        <Route
+          path="/about"
+          element={<About navTheme="black" footerTheme="white" />}
+        />
         <Route path="/news" element={<News />} />
-        <Route path="/work" element={<Work navTheme="white" />} />
-        <Route path="/careers" element={<Careers navTheme="black" />} />
-        <Route path="/contact" element={<Contact navTheme="white" />} />
+        <Route
+          path="/work"
+          element={<Work navTheme="white" footerTheme="black" />}
+        />
+        <Route
+          path="/careers"
+          element={<Careers navTheme="black" footerTheme="white" />}
+        />
+        <Route
+          path="/contact"
+          element={<Contact navTheme="white" footerTheme="black" />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

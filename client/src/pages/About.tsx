@@ -13,7 +13,7 @@ import type { PageProps } from "@/utils/types";
 import { useAppDispatch } from "@/store/hooks";
 import { setNavTheme } from "@/store/navbar-slice";
 
-const About = ({ navTheme = "white" }: PageProps) => {
+const About = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openAwards, setOpenAwards] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,8 +21,8 @@ const About = ({ navTheme = "white" }: PageProps) => {
 
   //to dispatch our set color for the nav
   useEffect(() => {
-    dispatch(setNavTheme(navTheme));
-  }, [navTheme, dispatch]);
+    dispatch(setNavTheme({ navTheme, footerTheme }));
+  }, [navTheme, footerTheme, dispatch]);
 
   const { data: admins, isLoading, isError } = useAdmins();
   const handleGetAdminDetails = (index: number) => {

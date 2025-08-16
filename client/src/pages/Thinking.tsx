@@ -8,7 +8,7 @@ import { useThinking } from "@/hooks/useThinking";
 import ThinkingTile from "@/components/Main-view/Thinking/ThinkingTile";
 import { filterOptions } from "@/config/thinkingconfig";
 
-const Thinking = ({ navTheme = "black" }: PageProps) => {
+const Thinking = ({ navTheme = "black", footerTheme = "white" }: PageProps) => {
   const dispatch = useAppDispatch();
   const keyItem = "category";
   ///we retriev the filter in sessionstorage here a
@@ -22,8 +22,8 @@ const Thinking = ({ navTheme = "black" }: PageProps) => {
   });
   //to dispatch our set color for the nav
   useEffect(() => {
-    dispatch(setNavTheme(navTheme));
-  }, [navTheme, dispatch]);
+    dispatch(setNavTheme({ navTheme, footerTheme }));
+  }, [navTheme, footerTheme, dispatch]);
 
   const { data: posts, isLoading, isError, error } = useThinking();
 
