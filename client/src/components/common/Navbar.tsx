@@ -76,15 +76,15 @@ const Navbar = () => {
   }, [openNav]);
 
   // Reset navbar position when mobile menu opens/closes
-  useEffect(() => {
-    const navbar = navbarRef.current;
-    if (!navbar) return;
+  // useEffect(() => {
+  //   const navbar = navbarRef.current;
+  //   if (!navbar) return;
 
-    if (openNav) {
-      // Reset navbar position when menu opens
-      gsap.set(navbar, { yPercent: 0 });
-    }
-  }, [openNav]);
+  //   if (openNav) {
+  //     // Reset navbar position when menu opens
+  //     gsap.set(navbar, { yPercent: 0 });
+  //   }
+  // }, [openNav]);
 
   //to prevent scrolling when menu is openNaved
   useEffect(() => {

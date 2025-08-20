@@ -79,7 +79,7 @@ const Home = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
         <title>BASIC/DEPT</title>
       </Helmet>
       <HeroVideo />
-      <div className="mx-auto max-w-7xl  px-6 sm:px-8 lg:px-10 py-10">
+      <div className="mx-auto max-w-7xl">
         <AwardsSection />
         <WorkSection />
       </div>
