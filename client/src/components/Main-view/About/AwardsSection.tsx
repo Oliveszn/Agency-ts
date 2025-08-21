@@ -16,7 +16,7 @@ const AwardsSection = ({ onOpenAwards }: AwardSectionProps) => {
   return (
     <section className="my-6 md:my-8 lg:my-12">
       <div>
-        <figure className="bg-priColor h-1 p-0 m-0 align-baseline border-0"></figure>
+        <figure className="bg-[var(--priColor)] h-1 p-0 m-0 align-baseline border-0"></figure>
         <div className="flex flex-row justify-between uppercase my-6 lg:my-10">
           <div className="font-medium">Sec.</div>
           <div className="font-medium">/C</div>
@@ -50,8 +50,8 @@ const AwardsSection = ({ onOpenAwards }: AwardSectionProps) => {
               >
                 <span
                   className="text-4xl md:text-6xl lg:text-7xl tracking-widest uppercase font-bold text-[#333]  relatve inline-block"
-                  onMouseEnter={() => handleMouseEnter(index)} // Handle mouse enter
-                  onMouseLeave={handleMouseLeave} // Handle mouse leave
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
                   onMouseMove={(e) => handleMouseMove(e, index)}
                   data-text={org.organization}
                 >

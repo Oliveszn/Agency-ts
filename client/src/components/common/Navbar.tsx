@@ -10,11 +10,11 @@ const Navbar = () => {
   const navTheme = useAppSelector((state) => state.theme.navTheme);
   ///nav menu links
   let links = [
-    { name: "WORK", link: "/work" },
     { name: "ABOUT", link: "/about" },
     { name: "THINKING", link: "/thinking" },
     { name: "CAREERS", link: "/careers" },
     { name: "CONTACT", link: "/contact" },
+    { name: "WORK", link: "/work" },
   ];
   let [openNav, setOpenNav] = useState(false);
   const navbarRef = useRef<HTMLDivElement>(null);

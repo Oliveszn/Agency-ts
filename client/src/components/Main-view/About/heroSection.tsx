@@ -1,8 +1,8 @@
 const HeroSection = () => {
   return (
-    <section>
-      <h1 className="text-5xl font-bold uppercase block lg:flex flex-col">
-        <div className="block lg:flex items-center mb-2">
+    <section className="py-4 max-w-full overflow-hidden">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase block lg:flex flex-col leading-tight">
+        <div className="lg:flex items-center mb-2">
           <span className="">
             <span>We</span>&nbsp; <span>turn</span>&nbsp;{" "}
             <br className="hidden lg:block" />
@@ -20,11 +20,13 @@ const HeroSection = () => {
         </div>
       </h1>
 
-      <p className="text-2xl font-bold lg:w-1/2 ml-auto mt-10">
-        <strong>BASIC/DEPT®</strong> is a global agency that thrives at the
-        intersection of design, data, and technology. Together, we’re focused on
-        transforming brands and culture — across the world.
-      </p>
+      <div className="mt-8 lg:mt-10">
+        <p className="text-xl md:text-2xl lg:text-3xl font-bold lg:w-1/2 lg:ml-auto max-w-full">
+          <strong>BASIC/DEPT®</strong> is a global agency that thrives at the
+          intersection of design, data, and technology. Together, we're focused
+          on transforming brands and culture — across the world.
+        </p>
+      </div>
     </section>
   );
 };

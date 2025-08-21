@@ -37,7 +37,7 @@ const About = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
   };
 
   return (
-    <div className="bg-[var(--secColor)] px-6 sm:px-8 lg:px-10 py-10">
+    <div className="bg-[var(--secColor)] px-4 sm:px-6 lg:px-8">
       <Helmet>
         <title>About Us</title>
       </Helmet>

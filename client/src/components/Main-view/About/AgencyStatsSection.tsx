@@ -2,7 +2,7 @@ const AgencyStatsSection = () => {
   return (
     <section className="my-6 md:my-8 lg:my-12">
       <div>
-        <figure className="bg-priColor h-1 p-0 m-0 align-baseline border-0"></figure>
+        <figure className="bg-[var(--priColor)] h-1 p-0 m-0 align-baseline border-0"></figure>
         <div className="flex flex-row justify-between uppercase my-10">
           <div className="font-medium">Sec.</div>
           <div className="font-medium">/A</div>
@@ -12,7 +12,7 @@ const AgencyStatsSection = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] ">
         <div className="mb-12 lg:mb-0">
-          <h2 className="uppercase text-4xl font-bold">
+          <h2 className="uppercase text-2xl md:text-3xl lg:text-4xl font-bold">
             Agency
             <br className="hidden lg:block" /> Snapshot
           </h2>

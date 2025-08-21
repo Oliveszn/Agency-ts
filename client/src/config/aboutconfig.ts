@@ -46,18 +46,26 @@ export const organization = [
 export const images = [
   {
     src: "https://cdn.sanity.io/images/8nn8fua5/production/efe6bb29a36ac6c1c3910e05109a8fcdff26f110-720x900.jpg?w=720&amp;fm=webp&amp;q=65",
-    position: "top-0 right-40",
+    // position: "top-0 right-40",
+    mobilePosition: "top-2 right-2",
+    desktopPosition: "top-0 right-40",
   },
   {
     src: "https://cdn.sanity.io/images/8nn8fua5/production/f249af15eb93ccb7f8a796bfd04002670ee49870-720x900.jpg?w=720&amp;fm=webp&amp;q=65",
-    position: "top-20 right-10",
+    // position: "top-20 right-10",
+    mobilePosition: "top-12 right-8",
+    desktopPosition: "top-20 right-10",
   },
   {
     src: "https://cdn.sanity.io/images/8nn8fua5/production/8629b3f04cae6cff3fa18289b6eee4fd40c4f4e8-720x903.jpg?w=720&amp;fm=webp&amp;q=65",
-    position: "top-10 left-18",
+    // position: "top-10 left-18",
+    mobilePosition: "top-4 left-2",
+    desktopPosition: "top-10 left-18",
   },
   {
     src: "https://cdn.sanity.io/images/8nn8fua5/production/ead0a1be85db6e308cff0308de4a03f1d39a02a9-720x903.jpg?w=720&amp;fm=webp&amp;q=65",
-    position: "top-36 left-24",
+    // position: "top-36 left-24",
+    mobilePosition: "top-20 left-8",
+    desktopPosition: "top-36 left-24",
   },
 ];

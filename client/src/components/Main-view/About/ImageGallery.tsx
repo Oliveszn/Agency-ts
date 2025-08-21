@@ -58,17 +58,23 @@ const ImageGallery = () => {
     <section className="my-6 md:my-8 lg:my-12">
       <div>
         <figure className="bg-[var(--priColor)] h-1 p-0 m-0 align-baseline border-0"></figure>
-        <div className="flex flex-row justify-between uppercase my-10">
-          <div className="font-medium">2010</div>
-          <div className="font-medium">Present</div>
-          <div className="text-2xl">●</div>
+        <div className="flex flex-row justify-between uppercase my-6 md:my-10">
+          <div className="font-medium text-sm md:text-base">2010</div>
+          <div className="font-medium text-sm md:text-base">Present</div>
+          <div className="text-lg md:text-2xl">●</div>
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <ol className="relative w-full max-w-3xl h-[100vh]">
+        <ol className="relative w-full max-w-3xl h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh] overflow-hidden">
           {images.map((image, index) => (
             <li
-              className={`absolute ${image.position} w-fit`}
+              className={`absolute w-fit
+                ${image.mobilePosition}
+                md:${image.desktopPosition.replace(
+                  /top-|right-|left-|bottom-/g,
+                  (match) => "md:" + match
+                )}
+              `}
               key={index}
               ref={(el) => {
                 imageRefs.current[index] = el;
@@ -77,7 +83,7 @@ const ImageGallery = () => {
               <img
                 src={image.src || "/placeholder.svg"}
                 alt={`Gallery image ${index + 1}`}
-                className="h-auto max-w-sm object-contain hover:cursor-pointer"
+                className="max-w-sm w-48 sm:w-80 lg:w-96 object-contain hover:cursor-pointer"
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
                 style={{

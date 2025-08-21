@@ -10,7 +10,7 @@ const AdminSection = ({ admins, handleGetAdminDetails }: AdminSectionProps) => {
   return (
     <section>
       <div>
-        <figure className="bg-priColor h-1 p-0 m-0 align-baseline border-0"></figure>
+        <figure className="bg-[var(--priColor)] h-1 p-0 m-0 align-baseline border-0"></figure>
         <div className="flex flex-row justify-between uppercase my-10">
           <div className="font-medium">Sec.</div>
           <div className="font-medium">/D</div>
