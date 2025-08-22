@@ -1,5 +1,6 @@
 // this hook is to hancle those cursors that change, when you get to a particular section
 import { useEffect, useRef, useState } from "react";
+import { useDeviceDetection } from "./useDeviceDetection";
 
 interface UseCursorProps {
   containerRef: React.RefObject<HTMLElement | null>;
@@ -11,7 +12,14 @@ export const useCursor = ({ containerRef, smoothness = 9 }: UseCursorProps) => {
   const [isActive, setIsActive] = useState(false);
   const mousePositionRef = useRef({ x: 0, y: 0 });
 
+  const { isTouchDevice } = useDeviceDetection();
+
   useEffect(() => {
+    //here we remove the cursor if it's a touch device
+    if (isTouchDevice) {
+      setIsActive(false);
+      return;
+    }
     let posX = 0,
       posY = 0,
       mouseX = 0,
@@ -65,15 +73,23 @@ export const useCursor = ({ containerRef, smoothness = 9 }: UseCursorProps) => {
       window.removeEventListener("scroll", handleScroll, true);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [containerRef, smoothness]);
+  }, [containerRef, smoothness, isTouchDevice]);
+  const handleMouseEnter = () => {
+    // Only activate on non-touch devices
+    if (!isTouchDevice) {
+      setIsActive(true);
+    }
+  };
 
-  const handleMouseEnter = () => setIsActive(true);
-  const handleMouseLeave = () => setIsActive(false);
+  const handleMouseLeave = () => {
+    setIsActive(false);
+  };
 
   return {
     cursorRef,
-    isActive,
+    isActive: isActive && !isTouchDevice, // we ensure cursor is never active on touch devices
     handleMouseEnter,
     handleMouseLeave,
+    isTouchDevice,
   };
 };

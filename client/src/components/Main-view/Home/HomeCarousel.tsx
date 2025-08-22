@@ -6,23 +6,30 @@ import { useRef } from "react";
 const HomeCarousel = () => {
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
-  const { cursorRef, isActive, handleMouseEnter, handleMouseLeave } = useCursor(
-    {
-      containerRef: carouselRef,
-      smoothness: 6,
-    }
-  );
+  const {
+    cursorRef,
+    isActive,
+    handleMouseEnter,
+    handleMouseLeave,
+    isTouchDevice,
+  } = useCursor({
+    containerRef: carouselRef,
+    smoothness: 6,
+  });
 
   return (
     <div ref={carouselRef} className={isActive ? "cursor-none" : ""}>
-      <CustomCursor
-        cursorRef={cursorRef}
-        isActive={isActive}
-        text="DRAG"
-        backgroundColor="#f9cdcd"
-        textColor="#252422"
-        backgroundImage="https://mirkozeppieri.emanuelepapale.com/wp-content/uploads/2018/07/project-hover-cursor.jpg"
-      />
+      {/* Only render CustomCursor on non-touch devices */}
+      {!isTouchDevice && (
+        <CustomCursor
+          cursorRef={cursorRef}
+          isActive={isActive}
+          text="DRAG"
+          backgroundColor="#f9cdcd"
+          textColor="#252422"
+          backgroundImage="https://mirkozeppieri.emanuelepapale.com/wp-content/uploads/2018/07/project-hover-cursor.jpg"
+        />
+      )}
 
       <div
         id="wrapper"

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
@@ -8,29 +8,50 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutUsSection = () => {
   const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
-  const pinnedRef = useRef(null);
-  const navRef = useRef(null);
+  const pinnedRef = useRef<any>(null);
+  const navRef = useRef<any>(null);
+  const matchMediaRef = useRef<any>(null);
+  const scrollTriggerRef = useRef<any>(null);
+  const location = useLocation();
 
   useEffect(() => {
-    const mm = gsap.matchMedia();
+    const timer = setTimeout(() => {
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill();
+      }
 
-    ///// we only appply it on larger screens where the layout is side by side
-    mm.add("(min-width: 640px)", () => {
-      ScrollTrigger.create({
-        trigger: pinnedRef.current,
-        start: "top 10%",
-        end: "bottom bottom",
-        pin: navRef.current,
-        pinSpacing: false,
-        invalidateOnRefresh: true,
+      if (matchMediaRef.current) {
+        matchMediaRef.current.kill();
+      }
+
+      const mm = gsap.matchMedia();
+      matchMediaRef.current = mm;
+
+      mm.add("(min-width: 640px)", () => {
+        scrollTriggerRef.current = ScrollTrigger.create({
+          trigger: pinnedRef.current,
+          start: "top 10%",
+          end: "bottom bottom",
+          pin: navRef.current,
+          pinSpacing: false,
+          invalidateOnRefresh: true,
+        });
       });
-    });
 
-    // Cleanup
+      ScrollTrigger.refresh();
+    }, 100);
+
     return () => {
-      mm.kill();
+      clearTimeout(timer); // Clear timeout on cleanup
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill();
+      }
+      if (matchMediaRef.current) {
+        matchMediaRef.current.kill();
+      }
     };
-  }, []);
+  }, [location.pathname]);
+
   return (
     <section className="mt-16 lg:mt-28 " ref={pinnedRef}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">

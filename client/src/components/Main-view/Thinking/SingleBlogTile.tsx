@@ -13,12 +13,18 @@ interface SingleBlogProps {
 const SingleBlogTile = ({ singlePosts }: SingleBlogProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const imageScrollTriggerRef = useRef<any>(null);
 
   useEffect(() => {
     if (!imageRef.current || !containerRef.current) return;
 
+    if (imageScrollTriggerRef.current) {
+      imageScrollTriggerRef.current.kill();
+    }
+
     const ctx = gsap.context(() => {
-      const trigger = ScrollTrigger.create({
+      // const trigger = ScrollTrigger.create({
+      imageScrollTriggerRef.current = ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
         end: "+=100vh",
@@ -47,7 +53,8 @@ const SingleBlogTile = ({ singlePosts }: SingleBlogProps) => {
           });
         },
         onEnterBack: () => {
-          const progress = trigger.progress;
+          // const progress = trigger.progress;
+          const progress = imageScrollTriggerRef.current?.progress || 0;
           gsap.set(imageRef.current, {
             position: "fixed",
             left: "50%",
@@ -61,12 +68,20 @@ const SingleBlogTile = ({ singlePosts }: SingleBlogProps) => {
       });
     }, containerRef);
 
-    return () => ctx.revert();
+    // return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      if (imageScrollTriggerRef.current) {
+        imageScrollTriggerRef.current.kill();
+        imageScrollTriggerRef.current = null;
+      }
+    };
   }, [singlePosts]);
+
   return (
     <>
       <div ref={containerRef}>
-        <div className="h-screen">
+        <div className="min-h-screen">
           <div className="flex items-center justify-between py-14">
             <div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium tracking-tighter max-w-[25ch] break-words uppercase">
@@ -92,7 +107,7 @@ const SingleBlogTile = ({ singlePosts }: SingleBlogProps) => {
 
         <div className="">
           <div className="flex flex-col lg:flex-row justify-between gap-4">
-            <div className="lg:flex-1 uppercase">
+            <div className="lg:w-1/2 lg:flex-shrink-0 uppercase">
               {singlePosts.categories?.map((cat: Category) => (
                 <p key={cat._id} className="font-bold">
                   {cat.title}
@@ -104,7 +119,7 @@ const SingleBlogTile = ({ singlePosts }: SingleBlogProps) => {
               <span className="">({formatDate(singlePosts.publishedAt)})</span>
             </div>
 
-            <div className="lg:flex-1">
+            <div className="lg:w-1/2 lg:flex-shrink-0 lg:ml-auto">
               <div className="text-lg lg:text-xl leading-normal prose prose-headings:text-[var(--priColor)] text-[var(--priColor)]">
                 <PortableText value={singlePosts.body} />
               </div>
