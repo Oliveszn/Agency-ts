@@ -6,13 +6,13 @@ export const useDeviceDetection = () => {
 
   useEffect(() => {
     const detectTouchDevice = () => {
-      // Multiple methods to detect touch devices
+      // here we use multiple methods to detect touch devices
       const hasTouchScreen =
         "ontouchstart" in window ||
         navigator.maxTouchPoints > 0 ||
         (navigator as any).msMaxTouchPoints > 0;
 
-      // Check for mobile/tablet user agents
+      // we check if its mobile or tablet
       const mobileRegex =
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
       const isMobileUserAgent = mobileRegex.test(navigator.userAgent);
@@ -30,7 +30,7 @@ export const useDeviceDetection = () => {
 
     detectTouchDevice();
 
-    // Optional: Re-check on resize (though device type shouldn't change)
+    //this is to recheck on resize although the devices cant or shouldnt change
     window.addEventListener("resize", detectTouchDevice);
 
     return () => {
