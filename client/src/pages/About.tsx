@@ -12,7 +12,7 @@ import AwardsSection from "@/components/Main-view/About/AwardsSection";
 import type { PageProps } from "@/utils/types";
 import { useAppDispatch } from "@/store/hooks";
 import { setNavTheme } from "@/store/navbar-slice";
-//add this to push small chabnge remove later
+
 const About = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openAwards, setOpenAwards] = useState(false);
