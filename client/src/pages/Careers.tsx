@@ -31,7 +31,7 @@ const Careers = ({ navTheme = "black", footerTheme = "white" }: PageProps) => {
           y: "0%",
           duration: 0.8,
           ease: "power2.out",
-          stagger: 0.05, // delay between each text element
+          stagger: 0.2, // delay between each text element
         }
       )
         // image reveal
@@ -59,26 +59,30 @@ const Careers = ({ navTheme = "black", footerTheme = "white" }: PageProps) => {
       <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2">
         <div className="lg:mt-24 text-[var(--priColor)] uppercase flex flex-col items-start">
           <h1 className="mb-20 lg:mb-40">
-            <div className="text-5xl lg:text-7xl font-semibold lg:font-bold">
-              <span className="inline-block pr-[0.15em] -mt-[2em]">
+            <div className="text-5xl lg:text-7xl font-semibold lg:font-bold leading-tight">
+              <div className="text-reveal-item overflow-hidden">
                 <span className="text-reveal-inner inline-block">Make</span>
-              </span>
-              <br />
-              <span className="inline-block pr-[0.15em] -mt-[2em]">
-                <span className="text-reveal-inner inline-block">Dope</span>
-              </span>
-              <span className="inline-block pr-[0.15em] -mt-[2em]">
-                <span className="text-reveal-inner inline-block">Sh*t.</span>
-              </span>
-              <br />
-              <span className="inline-block pr-[0.15em] -mt-[2em]">
-                <span className="pr-20">●</span>
-                <span className="text-reveal-inner inline-block">Get</span>
-              </span>
-              <br />
-              <span className="inline-block pr-[0.15em] -mt-[2em]">
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="text-reveal-item overflow-hidden">
+                  <span className="text-reveal-inner inline-block">Dope</span>
+                </div>
+                <div className="text-reveal-item overflow-hidden">
+                  <span className="text-reveal-inner inline-block">Sh*t.</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <span>●</span>
+                <div className="text-reveal-item overflow-hidden">
+                  <span className="text-reveal-inner inline-block">Get</span>
+                </div>
+              </div>
+
+              <div className="text-reveal-item overflow-hidden">
                 <span className="text-reveal-inner inline-block">Paid.</span>
-              </span>
+              </div>
             </div>
           </h1>
 

@@ -1,15 +1,45 @@
+import { useEffect } from "react";
+import { gsap } from "gsap";
+
 const HeroSection = () => {
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Create timeline for coordinated animations
+      const tl = gsap.timeline();
+
+      // Text reveals first
+      tl.fromTo(
+        ".text-reveal-inner",
+        {
+          y: "100%",
+        },
+        {
+          y: "0%",
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.3, // delay between each text element
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div className="w-full mb-10">
       <h1 className="grid grid-cols-2 items-center font-semibold mb-10">
-        <div className="text-6xl md:text-7xl lg:text-8xl">THINKING</div>
+        <div className="text-reveal-item overflow-hidden">
+          <div className="text-6xl md:text-7xl lg:text-8xl text-reveal-inner inline-block">
+            THINKING
+          </div>
+        </div>
         <div className="text-right text-6xl md:text-8xl lg:text-9xl">
           <span className="">●</span>
         </div>
       </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        <div className="mb-8 text-reveal-inner inline-block">
           <p className="text-xl uppercase mb-4">
             <strong>Brandbeats®</strong>
           </p>
@@ -22,7 +52,7 @@ const HeroSection = () => {
           </p>
         </div>
 
-        <div>
+        <div className="text-reveal-inner inline-block">
           <p className="text-xl uppercase mb-4">
             <strong>Applied®</strong>
           </p>

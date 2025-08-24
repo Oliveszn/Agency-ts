@@ -61,7 +61,7 @@ const Contact = ({ navTheme = "white", footerTheme = "black" }: PageProps) => {
           y: "0%",
           duration: 0.8,
           ease: "power2.out",
-          stagger: 0.05, // delay between each text element
+          stagger: 0.2, // delay between each text element
         }
       )
         // image reveal
