@@ -6,8 +6,9 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { ArrowRight, ArrowLeft } from "lucide-react";
-import type { Admins } from "@/pages/About";
+import type { Admins } from "@/utils/types";
 import { PortableText } from "@portabletext/react";
+import { useNavigate } from "react-router-dom";
 
 interface AboutAdminProps {
   admin: Admins;
@@ -22,15 +23,23 @@ const AboutAdmin = ({
   admin,
   open,
   setOpen,
+  currentIndex,
   setCurrentIndex,
   admins,
 }: AboutAdminProps) => {
+  const navigate = useNavigate();
+
   const goToNextAdmin = () => {
-    setCurrentIndex((prev) => (prev + 1) % admins.length);
+    ///notice the hash, yeah hash based routing
+    const nextIndex = (currentIndex + 1) % admins.length;
+    setCurrentIndex(nextIndex);
+    navigate(`/about#${admins[nextIndex].slug.current}`, { replace: true });
   };
 
   const goToPreviousAdmin = () => {
-    setCurrentIndex((prev) => (prev - 1 + admins.length) % admins.length);
+    const prevIndex = (currentIndex - 1 + admins.length) % admins.length;
+    setCurrentIndex(prevIndex);
+    navigate(`/about#${admins[prevIndex].slug.current}`, { replace: true });
   };
   return (
     <Sheet open={open} onOpenChange={setOpen}>
