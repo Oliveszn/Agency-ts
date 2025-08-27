@@ -15,83 +15,65 @@ const SingleBlogTile = ({ singlePosts }: SingleBlogProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageScrollTriggerRef = useRef<any>(null);
   const pinnedRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (!imageRef.current || !containerRef.current) return;
-
-  //   if (imageScrollTriggerRef.current) {
-  //     imageScrollTriggerRef.current.kill();
-  //   }
-
-  //   const ctx = gsap.context(() => {
-  //     // imageScrollTriggerRef.current = ScrollTrigger.create({
-  //     //   trigger: containerRef.current,
-  //     //   start: "top top",
-  //     //   end: "+=100vh",
-  //     //   pin: true,
-  //     //   scrub: 0.5,
-  //     //   onUpdate: (self) => {
-  //     //     const progress = self.progress;
-
-  //     //     gsap.set(imageRef.current, {
-  //     //       position: "fixed",
-  //     //       left: "50%",
-  //     //       transform: "translateX(-50%)",
-  //     //       zIndex: 1000,
-  //     //       top: `${100 - progress * 150}%`,
-  //     //     });
-  //     //   },
-  //     //   onLeave: () => {
-  //     //     gsap.set(imageRef.current, {
-  //     //       position: "fixed",
-  //     //       left: "50%",
-  //     //       transform: "translateX(-50%)",
-  //     //       zIndex: 1000,
-  //     //       top: "-100vh",
-  //     //       opacity: 0,
-  //     //       visibility: "hidden",
-  //     //     });
-  //     //   },
-  //     //   onEnterBack: () => {
-  //     //     const progress = imageScrollTriggerRef.current?.progress || 0;
-  //     //     gsap.set(imageRef.current, {
-  //     //       position: "fixed",
-  //     //       left: "50%",
-  //     //       transform: "translateX(-50%)",
-  //     //       zIndex: 1000,
-  //     //       top: `${100 - progress * 150}%`,
-  //     //       opacity: 1,
-  //     //       visibility: "visible",
-  //     //     });
-  //     //   },
-  //     // });
-
-  //     ScrollTrigger.create({
-  //       trigger: ".pinned-section",
-  //       start: "top 20%",
-  //       end: "bottom bottom",
-  //       pin: ".pinned-nav",
-  //       pinSpacing: false,
-  //     });
-  //   }, containerRef);
-
-  //   return () => ctx.revert();
-  //   // return () => {
-  //   //   ctx.revert();
-  //   //   if (imageScrollTriggerRef.current) {
-  //   //     imageScrollTriggerRef.current.kill();
-  //   //     imageScrollTriggerRef.current = null;
-  //   //   }
-  //   // };
-  // }, [singlePosts]);
   useEffect(() => {
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: ".pinned-section",
-        start: "top 50%",
-        end: "bottom bottom",
-        pin: ".pinned-nav",
-        pinSpacing: false,
+      ScrollTrigger.matchMedia({
+        "(min-width: 1024px)": () => {
+          ScrollTrigger.create({
+            trigger: ".pinned-section",
+            start: "top top",
+            end: "bottom 50%",
+            pin: ".pinned-nav",
+            pinSpacing: false,
+          });
+        },
+
+        "(max-width: 1023px)": () => {
+          const st = ScrollTrigger.getById("pinnedNav");
+          if (st) st.kill(); // only kill this one
+        },
+      });
+
+      imageScrollTriggerRef.current = ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top top",
+        end: "+=100vh",
+        pin: false,
+        scrub: 0.5,
+        onUpdate: (self) => {
+          const progress = self.progress;
+
+          gsap.set(imageRef.current, {
+            position: "fixed",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 1000,
+            top: `${100 - progress * 150}%`,
+          });
+        },
+        onLeave: () => {
+          gsap.set(imageRef.current, {
+            position: "fixed",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 1000,
+            top: "-100vh",
+            opacity: 0,
+            visibility: "hidden",
+          });
+        },
+        onEnterBack: () => {
+          const progress = imageScrollTriggerRef.current?.progress || 0;
+          gsap.set(imageRef.current, {
+            position: "fixed",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 1000,
+            top: `${100 - progress * 150}%`,
+            opacity: 1,
+            visibility: "visible",
+          });
+        },
       });
     }, containerRef);
 
@@ -226,14 +208,14 @@ const SingleBlogTile = ({ singlePosts }: SingleBlogProps) => {
         </section> */}
       </div>
 
-      {/* {singlePosts.mainImage && (
+      {singlePosts.mainImage && (
         <img
           ref={imageRef}
           src={singlePosts.mainImage.asset.url}
           alt={singlePosts.mainImage.alt || "Image"}
-          className="w-1/2 h-2/3 object-cover"
+          className="w-1/2 h-auto object-cover  sm:w-1/2 sm:h-auto md:w-1/2 md:h-[60vh] lg:w-1/2 lg:h-[70vh] "
         />
-      )} */}
+      )}
     </>
   );
 };

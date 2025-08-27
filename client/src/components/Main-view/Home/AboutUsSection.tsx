@@ -8,54 +8,80 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutUsSection = () => {
   const { overlayRef, handleMouseEnter, handleMouseLeave } = useHoverButton();
-  const pinnedRef = useRef<any>(null);
+  const containerRef = useRef<any>(null);
   const navRef = useRef<any>(null);
+  const pinnedRef = useRef(null);
   const matchMediaRef = useRef<any>(null);
   const scrollTriggerRef = useRef<any>(null);
   const location = useLocation();
 
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (scrollTriggerRef.current) {
+  //       scrollTriggerRef.current.kill();
+  //     }
+
+  //     if (matchMediaRef.current) {
+  //       matchMediaRef.current.kill();
+  //     }
+
+  //     const mm = gsap.matchMedia();
+  //     matchMediaRef.current = mm;
+
+  //     mm.add("(min-width: 640px)", () => {
+  //       scrollTriggerRef.current = ScrollTrigger.create({
+  //         trigger: pinnedRef.current,
+  //         start: "top 10%",
+  //         end: "bottom bottom",
+  //         pin: navRef.current,
+  //         pinSpacing: false,
+  //         invalidateOnRefresh: true,
+  //       });
+  //     });
+
+  //     ScrollTrigger.refresh();
+  //   }, 100);
+
+  //   return () => {
+  //     clearTimeout(timer); // Clear timeout on cleanup
+  //     if (scrollTriggerRef.current) {
+  //       scrollTriggerRef.current.kill();
+  //     }
+  //     if (matchMediaRef.current) {
+  //       matchMediaRef.current.kill();
+  //     }
+  //   };
+  // }, [location.pathname]);
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (scrollTriggerRef.current) {
-        scrollTriggerRef.current.kill();
-      }
+    const ctx = gsap.context(() => {
+      ScrollTrigger.matchMedia({
+        "(min-width: 1024px)": () => {
+          ScrollTrigger.create({
+            trigger: ".pinned-section",
+            start: "top 10%",
+            end: "bottom 80%",
+            pin: ".pinned-nav",
+            pinSpacing: false,
+          });
+        },
 
-      if (matchMediaRef.current) {
-        matchMediaRef.current.kill();
-      }
-
-      const mm = gsap.matchMedia();
-      matchMediaRef.current = mm;
-
-      mm.add("(min-width: 640px)", () => {
-        scrollTriggerRef.current = ScrollTrigger.create({
-          trigger: pinnedRef.current,
-          start: "top 10%",
-          end: "bottom bottom",
-          pin: navRef.current,
-          pinSpacing: false,
-          invalidateOnRefresh: true,
-        });
+        "(max-width: 1023px)": () => {
+          const st = ScrollTrigger.getById("pinnedNav");
+          if (st) st.kill(); // only kill this one
+        },
       });
+    }, containerRef);
 
-      ScrollTrigger.refresh();
-    }, 100);
-
-    return () => {
-      clearTimeout(timer); // Clear timeout on cleanup
-      if (scrollTriggerRef.current) {
-        scrollTriggerRef.current.kill();
-      }
-      if (matchMediaRef.current) {
-        matchMediaRef.current.kill();
-      }
-    };
-  }, [location.pathname]);
-
+    return () => ctx.revert();
+  }, []);
   return (
-    <section className="mt-16 lg:mt-28 " ref={pinnedRef}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
-        <div className="sm:order-none order-2" ref={navRef}>
+    <section className="mt-16 lg:mt-28 " ref={containerRef}>
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 pinned-section"
+        ref={pinnedRef}
+      >
+        <div className="pinned-nav">
           <div className="uppercase">
             <p className="text-4xl md:text-5xl lg:text-6xl font-bold lg:font-extrabold lg:leading-[4rem] tracking-wider">
               BASIC/DEPT® helps brands ● connect w/ culture
