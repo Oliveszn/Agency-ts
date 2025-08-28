@@ -80,7 +80,7 @@ const Thinking = ({ navTheme = "black", footerTheme = "white" }: PageProps) => {
           {filterOptions[keyItem].map((option) => (
             <label
               key={option.id}
-              className="flex gap-3 items-center text-base lg:text-lg font-normal md:font-medium lg:font-bold text-nowrap"
+              className="flex gap-3 items-center text-sm md:text-base lg:text-lg font-normal md:font-medium lg:font-bold text-nowrap"
             >
               <input
                 type="radio"

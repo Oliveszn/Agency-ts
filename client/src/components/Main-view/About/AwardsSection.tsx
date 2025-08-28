@@ -42,7 +42,11 @@ const AwardsSection = ({ onOpenAwards }: AwardSectionProps) => {
             <div className="relative navigation-item" key={org.organization}>
               <a
                 href="/about/awards"
-                onClick={onOpenAwards}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onOpenAwards(e);
+                }}
                 className="navigation-link"
                 style={{
                   zIndex: hoveredIndex === index ? 3 : 1, // Bring hovered link to the top

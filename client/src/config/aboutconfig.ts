@@ -69,3 +69,114 @@ export const images = [
     desktopPosition: "top-36 left-24",
   },
 ];
+
+export const awards = [
+  {
+    organization: "Css awards",
+    award: "site of the day",
+    project: "luminar",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "Agency of the Year",
+    project: "luminar",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "Honoree",
+    project: "Vizio",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "Honoree",
+    project: "Vizio",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "Honoree",
+    project: "google store",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "Honoree",
+    project: "kfc",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "Honoree",
+    project: "design with reach",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "Honoree",
+    project: "lulumelon studio",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "nominee",
+    project: "webex",
+    year: "2023",
+  },
+  {
+    organization: "Webby Awards",
+    award: "nominee",
+    project: "crafted",
+    year: "2023",
+  },
+  {
+    organization: "One show",
+    award: "merit award",
+    project: "moves",
+    year: "2022",
+  },
+  {
+    organization: "D&AD",
+    award: "Shortlist",
+    project: "culture manual",
+    year: "2021",
+  },
+  {
+    organization: "comm arts",
+    award: "winner",
+    project: "crafted",
+    year: "2022",
+  },
+  {
+    organization: "the fwa",
+    award: "site of the day",
+    project: "moves",
+    year: "2022",
+  },
+  {
+    organization: "the fwa",
+    award: "site of the year",
+    project: "nixon",
+    year: "2021",
+  },
+  {
+    organization: "W3 Awards",
+    award: "best of show",
+    project: "google awards",
+    year: "2020",
+  },
+  {
+    organization: "W3 Awards",
+    award: "gold",
+    project: "google awards",
+    year: "2020",
+  },
+  {
+    organization: "W3 Awards",
+    award: "silver",
+    project: "google awards",
+    year: "2020",
+  },
+];

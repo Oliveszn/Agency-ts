@@ -20,9 +20,9 @@ const AboutAwards = ({ open, setOpen }: AboutAwardsProps) => {
           <SheetHeader>
             <SheetTitle>
               <div>
-                <figure className="bg-secColor h-1 p-0 m-0 align-baseline border-0 mt-6"></figure>
+                <figure className="bg-[var(--secColor)] h-1 p-0 m-0 align-baseline border-0 mt-6"></figure>
               </div>
-              <div className="my-20 flex justify-end">
+              <div className=" flex justify-end">
                 <h1 className="uppercase text-4xl font-bold">
                   B®/Awrds.10 - 24©
                 </h1>

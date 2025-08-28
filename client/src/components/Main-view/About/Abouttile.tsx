@@ -6,7 +6,15 @@ interface AboutTileProps {
 }
 const AboutTile = ({ admin, handleGetAdminDetails }: AboutTileProps) => {
   return (
-    <li className="flex cursor-pointer" onClick={handleGetAdminDetails}>
+    // onClick={handleGetAdminDetails}
+    <li
+      className="flex cursor-pointer"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleGetAdminDetails();
+      }}
+    >
       <a>
         <div className="flex flex-row gap-6">
           {admin.images?.map((img, idx) => (
