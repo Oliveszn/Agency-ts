@@ -29,11 +29,11 @@ const HeroSection = () => {
     <div className="w-full mb-10">
       <h1 className="grid grid-cols-2 items-center font-semibold mb-10">
         <div className="text-reveal-item overflow-hidden">
-          <div className="text-6xl md:text-7xl lg:text-8xl text-reveal-inner inline-block">
+          <div className="text-4xl md:text-7xl lg:text-8xl text-reveal-inner inline-block">
             THINKING
           </div>
         </div>
-        <div className="text-right text-6xl md:text-8xl lg:text-9xl">
+        <div className="text-right text-5xl sm:text-6xl md:text-7xl lg:text-9xl">
           <span className="">●</span>
         </div>
       </h1>

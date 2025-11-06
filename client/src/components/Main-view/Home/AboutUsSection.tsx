@@ -24,7 +24,7 @@ const AboutUsSection = () => {
             pin: ".pinned-nav",
             pinSpacing: false,
             invalidateOnRefresh: true,
-            markers: true,
+            // markers: true,
           });
         },
 
